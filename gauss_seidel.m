@@ -5,7 +5,8 @@ function [x, k, ier] = gauss_seidel(A, b, x, tol, kmax)
     %
     % Long funzione che applica l'algoritmo di gauss saidel a una matrice non sparsa
     n = length(b);
-    ier = 1
+    ier = 1;
+
     for k = 1:kmax
         y = x(1);
         x(1) = (b(1) - A(1, 2:n) * x(2:n)) / A(1, 1);
@@ -13,7 +14,7 @@ function [x, k, ier] = gauss_seidel(A, b, x, tol, kmax)
         emax = abs(x(1) - y);
 
         for i = 2:n
-            x(i) = (b(i) - A(i, 1:i - 1) * x(1:i - 1) - ...
+            x(i) = (b(i) - A(i, 1:i - 1) * x(1:i-1) - ...
                 A(i, i + 1:n) * x(i + 1:n)) / A(i, i);
 
             if abs(x(i)) > xmax
@@ -32,4 +33,3 @@ function [x, k, ier] = gauss_seidel(A, b, x, tol, kmax)
         end
 
     end
-end
