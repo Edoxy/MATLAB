@@ -7,19 +7,25 @@ function [x, k, ier] = gauss_seidel(A, b, x, tol, kmax)
     %1:00 h nella lezione del 12
     n = length(b);
     d = diag(A);
-    [c, r, a] = find(A' -diag(diag(A)));
-    ier = 1
+    [c, r, a] = find(A' -diag(d));
+    ier = 1;
 
     for k = 1:kmax
 
         xmax = 0;
         emax = 0;
+        count = 0;
 
         for i = 1:n
             y = x(i);
-            %x(i) = (b(i) - A(i, 1:i - 1) * x(1:i - 1) - A(i, i + 1:n) * x(i + 1:n)) / A(i, i);
 
-            s =
+            count0 = count;
+            
+            while count +1 <= length(r) && r(count +1) == i
+                count = count + 1;
+            end
+
+            s = a(count0 +1:count)'*x(c(count0 + 1:count));
             x(i) = (b(i) - s) / d(i);
 
             if abs(x(i)) > xmax
