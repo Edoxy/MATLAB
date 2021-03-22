@@ -4,12 +4,15 @@ function [x, k, ier] = jacobi(A, b, x0, toll, kmax)
     k = 0;
     n = length(b);
     D = diag(diag(A));
-    rho = max(abs(eig(eye(n)-inv(D)*A)));
+    %controlla della convergenza
+    rho = max(abs(eig(eye(n)-inv(D)*A)))
     if rho > 1
+        %se non converge la matrice allora interrompe il metodo
         ier = 2;
         return
+    end
     C = A-D;
-    for K = 1:kmax
+    for k = 1:kmax
         x = D\(b-C*x0);
         if norm(x - x0, inf) <= toll*norm(x, inf)
             ier = 0;
