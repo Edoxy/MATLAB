@@ -14,7 +14,7 @@ function [x, k, ier] = gauss_seidel(A, b, x, tol, kmax)
         emax = abs(x(1) - y);
 
         for i = 2:n
-            x(i) = (b(i) - A(i, 1:i - 1) * x(1:i-1) - ...
+            x(i) = (b(i) - A(i, 1:i - 1) * x(1:i - 1) - ...
                 A(i, i + 1:n) * x(i + 1:n)) / A(i, i);
 
             if abs(x(i)) > xmax
